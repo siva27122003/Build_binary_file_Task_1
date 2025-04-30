@@ -1,8 +1,10 @@
-#  Go API with Gin
+
+```markdown
+# Go API with Gin
 
 ---
 
-##  Installation Steps
+## Installation Steps
 
 ### Step 1: Install Required Packages
 
@@ -21,7 +23,7 @@
 
 ---
 
-##  Build and Run the API Locally
+## Build and Run the API Locally
 
 ### Step 2: Project Folder Structure
 
@@ -110,7 +112,7 @@ go mod init bookapi
 
 ---
 
-##  Troubleshooting: SSL Certificate Errors
+## Troubleshooting: SSL Certificate Errors
 
 I encountered the following error when fetching dependencies:
 
@@ -132,7 +134,7 @@ go get -u github.com/gin-gonic/gin
 
 ---
 
-##  Running the Application
+## Running the Application
 
 ### Step 6: Run the Application
 
@@ -158,23 +160,23 @@ Now I can access the API at:
 
 ---
 
-##  Testing the API
+## Testing the API
 
 ### Using Browser:
 ```
 http://localhost:8081/books
 ```
 
-###  Using Terminal:
+### Using Terminal:
 ```bash
 curl http://localhost:8081/books
 ```
 
 ---
 
-##  Common Issues & Fixes
+## Common Issues & Fixes
 
-###  `localhost refused to connect`
+### `localhost refused to connect`
 
 Since I ran the app inside Docker, I needed to map the port properly:
 
@@ -182,20 +184,23 @@ Since I ran the app inside Docker, I needed to map the port properly:
 docker run -p 8081:8081 bookapi
 ```
 
-```markdown
+---
 
- The steps taken to compress, transfer, and execute a compiled Go project binary (`main`) from one Docker container to another.
+## Transfer Binary Between Containers
+
+The steps taken to compress, transfer, and execute a compiled Go project binary (`main`) from one Docker container to another.
 
 ---
 
-##  Source Container
+## Source Container
+
 - **Container ID:** `1181a8fe777b`
 - **Project Directory:** `/go_project/bin`
 - **Binary File:** `main`
 
 ---
 
-##  Step 1: Create ZIP Archive in Source Container
+## Step 1: Create ZIP Archive in Source Container
 
 Access the source container:
 
@@ -212,7 +217,7 @@ zip -r my_project.zip /go_project/bin
 
 ---
 
-##  Step 2: Transfer ZIP from Source to Host
+## Step 2: Transfer ZIP from Source to Host
 
 On the host machine:
 
@@ -251,6 +256,6 @@ cd go_project/bin
 chmod +x main
 ./main
 ```
+```
 
 ---
-
