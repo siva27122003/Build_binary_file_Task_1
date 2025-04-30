@@ -1,4 +1,3 @@
-```markdown
 # Go API with Gin
 
 ---
@@ -10,16 +9,17 @@
 #### Requirements
 
 1. **Install `sudo` (if not installed):**
-   ```bash
-   apt-get update
-   apt-get install sudo
-   ```
+
+    ```bash
+    apt-get update
+    apt-get install sudo
+    ```
 
 2. **Install Go:**
-   ```bash
-   sudo apt install golang-go
-   ```
 
+    ```bash
+    sudo apt install golang-go
+    ```
 ---
 
 ## Build and Run the API Locally
