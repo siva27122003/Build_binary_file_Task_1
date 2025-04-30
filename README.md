@@ -182,4 +182,75 @@ Since I ran the app inside Docker, I needed to map the port properly:
 docker run -p 8081:8081 bookapi
 ```
 
+```markdown
+
+ The steps taken to compress, transfer, and execute a compiled Go project binary (`main`) from one Docker container to another.
+
 ---
+
+##  Source Container
+- **Container ID:** `1181a8fe777b`
+- **Project Directory:** `/go_project/bin`
+- **Binary File:** `main`
+
+---
+
+##  Step 1: Create ZIP Archive in Source Container
+
+Access the source container:
+
+```bash
+docker exec -it 1181a8fe777b bash
+```
+
+Inside the container, create a ZIP file:
+
+```bash
+cd /go_project/bin
+zip -r my_project.zip /go_project/bin
+```
+
+---
+
+##  Step 2: Transfer ZIP from Source to Host
+
+On the host machine:
+
+```bash
+docker cp 1181a8fe777b:/go_project/bin/my_project.zip .
+```
+
+---
+
+## Step 3: Copy ZIP to Target Container
+
+- **Target Container ID:** `4de8f4cca4f6`
+
+From the host machine:
+
+```bash
+docker cp my_project.zip 4de8f4cca4f6:/root/
+```
+
+---
+
+## Step 4: Extract and Run in Target Container
+
+Access the target container:
+
+```bash
+docker exec -it 4de8f4cca4f6 bash
+```
+
+Inside the container:
+
+```bash
+cd /root
+unzip my_project.zip
+cd go_project/bin
+chmod +x main
+./main
+```
+
+---
+
