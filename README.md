@@ -1,6 +1,3 @@
-
----
-
 ```markdown
 # Go API with Gin
 
@@ -259,7 +256,3 @@ chmod +x main
 ./main
 ```
 ```
-
----
-
-Let me know if you want this converted into a downloadable file.
