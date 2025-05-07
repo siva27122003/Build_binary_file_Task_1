@@ -1,5 +1,3 @@
-Here's your content properly structured and corrected in clean `README.md` format, ready to paste:
-
 ---
 
 ```markdown
@@ -8,15 +6,14 @@ Here's your content properly structured and corrected in clean `README.md` forma
 This project demonstrates how to build and run a Go application using Docker.
 
 ## Project Structure
-
-```
-
 go\_project/
 ├── Dockerfile
 ├── build.sh
 ├── main.go
 ├── go.mod
 └── go.sum
+
+```
 
 ````
 
