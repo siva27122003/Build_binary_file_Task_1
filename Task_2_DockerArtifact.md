@@ -15,8 +15,6 @@ go\_project/
 
 ```
 
-````
-
 ## build.sh Script
 
 Ensure your `build.sh` script contains the following:
