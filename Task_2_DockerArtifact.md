@@ -1,19 +1,14 @@
----
-
-```markdown
 # Go Project Docker Setup
 
 This project demonstrates how to build and run a Go application using Docker.
 
 ## Project Structure
-go\_project/
+go_project/
 ├── Dockerfile
 ├── build.sh
 ├── main.go
 ├── go.mod
 └── go.sum
-
-```
 
 ## build.sh Script
 
@@ -25,7 +20,7 @@ set -e
 echo "Building the Go application..."
 mkdir -p bin
 go build -o bin/bookapi main.go
-````
+```
 
 ## Dockerfile
 
@@ -107,8 +102,3 @@ CMD ["./bin/bookapi"]
 * The `main.go` file must contain a valid `func main()`.
 * Ensure `build.sh` is executable using `chmod +x build.sh`.
 * Update the port number in `EXPOSE` and `docker run` if your app uses a different one.
-
-```
-
-Would you like me to generate and provide this as a downloadable `.md` file?
-```
