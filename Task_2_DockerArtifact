@@ -1,4 +1,5 @@
 
+
 ---
 
 ```markdown
@@ -51,13 +52,13 @@ CMD ["./bookapi"]
 
 ## Build and Run
 
-Step 1: Build the Docker image
+### Step 1: Build the Docker image
 
 ```bash
 docker build -t my_app_image .
 ```
 
-Step 2: Run the Docker container
+### Step 2: Run the Docker container
 
 ```bash
 docker run -it -p 8088:8088 my_app_image
@@ -65,50 +66,43 @@ docker run -it -p 8088:8088 my_app_image
 
 ## Common Errors and Fixes
 
-Error: Go version mismatch
+### Error 1: Go version mismatch
 
 ```
 go: go.mod requires go >= 1.22.2 (running go 1.21.13; GOTOOLCHAIN=local)
 ```
 
-Fix: Update your Dockerfile to use a compatible version of Go.
+**Cause:** The Docker image used an outdated Go version.
+
+**Fix:** Update Dockerfile to use the correct Go version:
 
 ```dockerfile
 FROM golang:1.22.2 AS builder
 ```
 
-Error: Executable not found in final image
+---
+
+### Error 2: Executable not found in final image
 
 ```
 exec: "./bin/bookapi": stat ./bin/bookapi: no such file or directory
 ```
 
-Cause: The binary was not copied to the expected path.
+**Cause:** The binary was either not built properly or copied incorrectly in the final stage.
 
-Fix: Use one of the following solutions:
+**Fix:**
 
-Option A (recommended):
+**Option A (Recommended):** Place the binary in the root of the image:
 
 ```dockerfile
 COPY --from=builder /app/bin/bookapi .
 CMD ["./bookapi"]
 ```
 
-Option B (if you want to keep it inside /bin):
+**Option B:** Retain directory structure and adjust the command:
 
 ```dockerfile
 RUN mkdir -p bin
 COPY --from=builder /app/bin/bookapi ./bin/bookapi
 CMD ["./bin/bookapi"]
-```
-
-## Notes
-
-* The `main.go` file must contain a valid `func main()`.
-* Make sure `build.sh` is executable using `chmod +x build.sh`.
-* Update `EXPOSE` and `CMD` ports if your app uses a different one.
-
-```
-
-Let me know if you'd like this as a downloadable `.md` file.
 ```
