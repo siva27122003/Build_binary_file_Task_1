@@ -1,4 +1,4 @@
-
+Here's your content properly structured and corrected in clean `README.md` format, ready to paste:
 
 ---
 
@@ -105,4 +105,15 @@ CMD ["./bookapi"]
 RUN mkdir -p bin
 COPY --from=builder /app/bin/bookapi ./bin/bookapi
 CMD ["./bin/bookapi"]
+```
+
+## Notes
+
+* The `main.go` file must contain a valid `func main()`.
+* Ensure `build.sh` is executable using `chmod +x build.sh`.
+* Update the port number in `EXPOSE` and `docker run` if your app uses a different one.
+
+```
+
+Would you like me to generate and provide this as a downloadable `.md` file?
 ```
