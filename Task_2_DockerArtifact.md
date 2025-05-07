@@ -97,8 +97,3 @@ COPY --from=builder /app/bin/bookapi ./bin/bookapi
 CMD ["./bin/bookapi"]
 ```
 
-## Notes
-
-* The `main.go` file must contain a valid `func main()`.
-* Ensure `build.sh` is executable using `chmod +x build.sh`.
-* Update the port number in `EXPOSE` and `docker run` if your app uses a different one.
