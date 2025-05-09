@@ -1,4 +1,3 @@
-It looks like you're aiming to provide detailed steps for setting up a Jenkins Freestyle project without YAML or syntax errors. Here's the clean version of your instructions without the syntax issues:
 
 ---
 
@@ -122,4 +121,3 @@ cd /var/jenkins_home/workspace/GoBookAPI
 
 ---
 
-This version should work correctly without syntax errors! If you need any further clarification or adjustments, feel free to ask!
