@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
-# Set Go module cache to local folder
-export GOMODCACHE=$(pwd)/gocache
+# Redirect Go cache and sumdb to local writable directory
+export GOPATH=$(pwd)/go
+export GOMODCACHE=$GOPATH/pkg/mod
+export GOCACHE=$GOPATH/pkg/cache
 
 # Navigate to the script's root
 SCRIPT_DIR=$(dirname "$0")
