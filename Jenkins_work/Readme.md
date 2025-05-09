@@ -53,7 +53,7 @@ docker build -t jenkins-golang-bookapi .
 
 ### **3. Run Jenkins Container**
 
-I run the Jenkins container, mapping ports for the Jenkins UI and the Go application.
+I ran the Jenkins container, mapping ports for the Jenkins UI and the Go application.
 
 ```bash
 docker run -d -p 8090:8080 -p 8091:8081 --name jenkins-golang-bookapi jenkins-golang-bookapi
@@ -118,4 +118,3 @@ cd /var/jenkins_home/workspace/GoBookAPI
 ./bookapi_server
 ```
 ---
-
