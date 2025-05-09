@@ -19,7 +19,7 @@
 
 ### **1. Dockerfile Configuration**
 
-I created a `Dockerfile` in the project root to extend Jenkins, add Go, and configure dependencies for the **GoLang BookAPI** project.
+I created a `Dockerfile` in the project root to extend Jenkins, add Go, and configure dependencies for the GoLang BookAPI project.
 
 #### **Dockerfile**:
 
@@ -46,7 +46,7 @@ USER jenkins
 
 ### **2. Build Docker Image**
 
-I built the custom Jenkins image with Go and the required packages for the **GoLang BookAPI** project.
+I built the custom Jenkins image with Go and the required packages for the GoLang BookAPI project.
 
 ```bash
 docker build -t jenkins-golang-bookapi .
@@ -54,7 +54,7 @@ docker build -t jenkins-golang-bookapi .
 
 ### **3. Run Jenkins Container**
 
-I ran the Jenkins container, mapping ports for the Jenkins UI and the Go application.
+I run the Jenkins container, mapping ports for the Jenkins UI and the Go application.
 
 ```bash
 docker run -d -p 8090:8080 -p 8091:8081 --name jenkins-golang-bookapi jenkins-golang-bookapi
