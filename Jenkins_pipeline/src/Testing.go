@@ -1,50 +1,28 @@
 package main
 
 import (
-	"bytes"
 	"testing"
 )
 
-func TestGreet(t *testing.T) {
+// TestValidatePhoneNumber tests the ValidatePhoneNumber function
+func TestValidatePhoneNumber(t *testing.T) {
 	tests := []struct {
-		name     string
-		expected string
+		phone   string
+		isValid bool
 	}{
-		{"Alice", "Hello, Alice!"},
-		{"Bob", "Hello, Bob!"},
-		{"", "Hello, World!"},
+		{"+12345678901", true},       // valid phone number
+		{"1234567890", true},         // valid phone number without '+'
+		{"+12345", false},            // invalid phone number (too short)
+		{"12345678901234567890", false}, // invalid phone number (too long)
+		{"123-456-7890", false},      // invalid phone number (wrong format)
+		{"abcdef12345", false},      // invalid phone number (letters included)
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			actual := Greet(tt.name)
-			if actual != tt.expected {
-				t.Errorf("Greet(%s) = %s; want %s", tt.name, actual, tt.expected)
+		t.Run(tt.phone, func(t *testing.T) {
+			if got := ValidatePhoneNumber(tt.phone); got != tt.isValid {
+				t.Errorf("ValidatePhoneNumber(%s) = %v, want %v", tt.phone, got, tt.isValid)
 			}
 		})
-	}
-}
-
-func TestMainWithUserInput(t *testing.T) {
-	// Simulating user input by redirecting stdin to a buffer
-	input := "Alice\n"
-	expected := "Hello, Alice!\n"
-
-	// Redirect stdin
-	oldStdin := os.Stdin
-	os.Stdin = bytes.NewBufferString(input)
-	defer func() { os.Stdin = oldStdin }() // Restore original stdin after the test
-
-	// Capture output
-	var buf bytes.Buffer
-	fmt.Print("Enter your name: ")
-	_, err := fmt.Scanln(&buf)
-	if err != nil {
-		t.Errorf("Error reading input: %v", err)
-	}
-
-	// Check if the output is what we expected
-	if buf.String() != expected {
-		t.Errorf("Expected '%s', got '%s'", expected, buf.String())
 	}
 }
