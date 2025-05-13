@@ -1,39 +1,50 @@
 package main
 
 import (
-    "github.com/gin-gonic/gin"
-    "github.com/stretchr/testify/assert"
-    "net/http"
-    "net/http/httptest"
-    "testing"
+	"bytes"
+	"testing"
 )
 
-func TestGetBookById(t *testing.T) {
-    // Setup the Gin router
-    r := gin.Default()
-    r.GET("/books/:id", getBookById)
+func TestGreet(t *testing.T) {
+	tests := []struct {
+		name     string
+		expected string
+	}{
+		{"Alice", "Hello, Alice!"},
+		{"Bob", "Hello, Bob!"},
+		{"", "Hello, World!"},
+	}
 
-    // Test: Book with ID "1"
-    req, _ := http.NewRequest("GET", "/books/1", nil)
-    w := httptest.NewRecorder()
-    r.ServeHTTP(w, req)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := Greet(tt.name)
+			if actual != tt.expected {
+				t.Errorf("Greet(%s) = %s; want %s", tt.name, actual, tt.expected)
+			}
+		})
+	}
+}
 
-    // Check the status code
-    assert.Equal(t, http.StatusOK, w.Code)
+func TestMainWithUserInput(t *testing.T) {
+	// Simulating user input by redirecting stdin to a buffer
+	input := "Alice\n"
+	expected := "Hello, Alice!\n"
 
-    // Check the response body
-    expected := `{"id":"1","title":"Book One","author":"Author One"}`
-    assert.JSONEq(t, expected, w.Body.String())
+	// Redirect stdin
+	oldStdin := os.Stdin
+	os.Stdin = bytes.NewBufferString(input)
+	defer func() { os.Stdin = oldStdin }() // Restore original stdin after the test
 
-    // Test: Book with ID "3" (Non-existing book)
-    req, _ = http.NewRequest("GET", "/books/3", nil)
-    w = httptest.NewRecorder()
-    r.ServeHTTP(w, req)
+	// Capture output
+	var buf bytes.Buffer
+	fmt.Print("Enter your name: ")
+	_, err := fmt.Scanln(&buf)
+	if err != nil {
+		t.Errorf("Error reading input: %v", err)
+	}
 
-    // Check the status code
-    assert.Equal(t, http.StatusNotFound, w.Code)
-
-    // Check the response body
-    expectedNotFound := `{"message":"Book not found"}`
-    assert.JSONEq(t, expectedNotFound, w.Body.String())
+	// Check if the output is what we expected
+	if buf.String() != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, buf.String())
+	}
 }
