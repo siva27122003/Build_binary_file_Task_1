@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir('Jenkins_pipeline/src') {
-                    sh 'go test'
+                    sh 'go test ./...'
                 }
             }
         }
