@@ -1,27 +1,32 @@
- pipeline {
+pipeline {
     agent any
 
     environment {
         GOROOT = "/usr/local/go"
-        PATH = "${GOROOT}/bin:${env.PATH}"
+        GOPATH = "/go"
+        PATH = "${GOROOT}/bin:${GOPATH}/bin:${env.PATH}"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/siva27122003/Build_binary_file_Task_1.git'
+                git 'https://github.com/siva27122003/Build_binary_file_Task_1.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'go build -o main main.go'
+                dir('Jenkins_pipeline/src') {
+                    sh 'go build -o main main.go'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'go test -v'
+                dir('Jenkins_pipeline/src') {
+                    sh 'go test'
+                }
             }
         }
     }
