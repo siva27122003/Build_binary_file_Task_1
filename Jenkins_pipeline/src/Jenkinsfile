@@ -21,6 +21,13 @@ pipeline {
                 }
             }
         }
+        stage('Prepare Modules') {
+            steps {
+                dir('Jenkins_pipeline/src') {
+                    sh 'go mod tidy'
+                }
+            }
+        }
 
         stage('Test') {
             steps {
