@@ -39,8 +39,8 @@ pipeline {
         stage('Run Binary') {
             steps {
                 dir('Jenkins_pipeline/src') {
-                    sh 'chmod +x main'
-                    sh './main'
+                    sh '''chmod +x main'
+                        ./main'''
                 }
             }
         }
