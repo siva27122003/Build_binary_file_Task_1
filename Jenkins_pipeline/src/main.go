@@ -1,21 +1,28 @@
 package main
 
 import (
-	"regexp"
 	"fmt"
+	"os"
+	"regexp"
 )
 
 // ValidatePhoneNumber checks if the provided phone number is valid based on a simple pattern
 func ValidatePhoneNumber(phone string) bool {
-	// A simple regex for phone numbers: starts with a + and followed by 10-15 digits
-	// Adjust the regex as per your specific phone number format
+	// Regex: optional +, followed by 10 to 15 digits
 	re := regexp.MustCompile(`^\+?[0-9]{10,15}$`)
 	return re.MatchString(phone)
 }
 
 func main() {
-	// Example usage:
-	phone := "+12345678901"
+	// Check if a phone number was passed as an argument
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: ./main <phone-number>")
+		return
+	}
+
+	// Get the phone number from the command-line arguments
+	phone := os.Args[1]
+
 	if ValidatePhoneNumber(phone) {
 		fmt.Println("Valid phone number")
 	} else {
