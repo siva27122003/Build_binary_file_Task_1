@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-            
-                git 'https://github.com/siva27122003/Build_binary_file_Task_1.git'
-            }
-        }
-
         stage('Prepare Modules') {
             steps {
                 dir('Jenkins_pipeline/src') {
