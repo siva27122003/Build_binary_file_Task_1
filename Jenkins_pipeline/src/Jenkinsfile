@@ -32,8 +32,10 @@ pipeline {
         stage('Run Binary') {
             steps {
                 dir('Jenkins_pipeline/src') {
-                    sh '''chmod +x main
-                        ./main'''
+                    sh '''
+                        chmod +x main
+                        ./main 9876543210
+                    '''
                 }
             }
         }
@@ -43,6 +45,22 @@ pipeline {
                 dir('Jenkins_pipeline/src') {
                     sh 'go test ./...'
                 }
+            }
+        }
+
+        stage('Zip Build') {
+            steps {
+                sh '''
+                    mkdir -p artifact_output
+                    cd Jenkins_pipeline/src
+                    zip ../../artifact_output/phone_number_validate.zip main
+                '''
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'artifact_output/phone_number_validate.zip', allowEmptyArchive: false
             }
         }
     }
