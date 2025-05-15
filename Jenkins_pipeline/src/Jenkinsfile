@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                cleanWs()
+            
                 git 'https://github.com/siva27122003/Build_binary_file_Task_1.git'
             }
         }
