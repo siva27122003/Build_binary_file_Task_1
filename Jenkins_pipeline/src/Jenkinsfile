@@ -21,10 +21,16 @@ pipeline {
                 }
             }
         }
+
         stage('Prepare Modules') {
             steps {
                 dir('Jenkins_pipeline/src') {
-                    sh 'go mod tidy'
+                    sh '''
+                        if [ ! -f go.mod ]; then
+                            go mod init buildbinarytask
+                        fi
+                        go mod tidy
+                    '''
                 }
             }
         }
