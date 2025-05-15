@@ -1,5 +1,3 @@
----
-
 ###  Faced Issues and Fixes
 
 ####  **Error 1: Outdated Code Used in Jenkins Build**
