@@ -14,14 +14,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                dir('Jenkins_pipeline/src') {
-                    sh 'go build -o main main.go'
-                }
-            }
-        }
-
         stage('Prepare Modules') {
             steps {
                 dir('Jenkins_pipeline/src') {
@@ -31,6 +23,23 @@ pipeline {
                         fi
                         go mod tidy
                     '''
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('Jenkins_pipeline/src') {
+                    sh 'go build -o main main.go'
+                }
+            }
+        }
+
+        stage('Run Binary') {
+            steps {
+                dir('Jenkins_pipeline/src') {
+                    sh 'chmod +x main'
+                    sh './main'
                 }
             }
         }
