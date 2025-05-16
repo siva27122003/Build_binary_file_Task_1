@@ -106,7 +106,7 @@ zip phone_number_validate.zip main
 
 ---
 
-## 📦 Output Artifact
+## Output Artifact
 
 After successful execution, Jenkins will archive:
 
