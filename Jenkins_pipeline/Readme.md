@@ -34,7 +34,7 @@ This repository presents an end-to-end Continuous Integration and Continuous Dep
 
 ##  Repository Structure
 
-```
+```bash
 
 Build\_binary\_file\_Task\_1/
 ├── Docker\_Artifact/            # (Optional: Artifact management)
