@@ -59,6 +59,11 @@ pipeline {
                 '''
             }
         }
+        stage('Test parameter'){
+            steps{
+                echo " Build completed! build done by ${params.build_by}"
+            }
+        }
 
         stage('Archive') {
             steps {
