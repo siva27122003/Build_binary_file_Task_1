@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Test parameter'){
             steps{
-                echo " Build completed! build done by ${params.build_by}"
+                echo " Build completed! build done by ${params.Build_by}"
             }
         }
 
