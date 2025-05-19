@@ -2,9 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = "sivasankar123"
-        DOCKERHUB_PASS = "Siva@2003"    // Ideally, store this as Jenkins secret and inject here
-        IMAGE_NAME = "${DOCKERHUB_USER}/phone-number-validator"
+        IMAGE_NAME = "sivasankar123/phone-number-validator"
         TAG = "latest"
     }
 
@@ -24,8 +22,13 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                // safer to avoid password in plain text in logs
-                sh "echo ${DOCKERHUB_PASS} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-hub-creds', 
+                    usernameVariable: 'DOCKERHUB_USER', 
+                    passwordVariable: 'DOCKERHUB_PASS'
+                )]) {
+                    sh "echo ${DOCKERHUB_PASS} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+                }
             }
         }
 
@@ -38,7 +41,7 @@ pipeline {
 
     post {
         always {
-            echo "Pipeline execution finished."
+            echo "✅ Pipeline execution finished."
         }
     }
 }
