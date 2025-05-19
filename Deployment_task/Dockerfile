@@ -2,7 +2,7 @@ FROM alpine:latest
 
 WORKDIR /app
 
-COPY app/main 
+COPY main /app/main 
 
 RUN chmod +x main
 
