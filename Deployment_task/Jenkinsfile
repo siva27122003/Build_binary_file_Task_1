@@ -1,33 +1,27 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24.0.5' // or a recent docker CLI image
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
+
     environment {
         DOCKER_IMAGE = "sivasankar123/phone-number-validator"
         TAG = "latest"
         DOCKER_USER = "sivasankar123"
         DOCKER_PASS = "Siva@2003"
     }
+
     stages {
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE}:${TAG} ."
-            }
-        }
-        stage('Docker Login') {
-            steps {
-                sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin"
-            }
-        }
-        stage('Push to Docker Hub') {
-            steps {
-                sh "docker push ${DOCKER_IMAGE}:${TAG}"
+                script {
+                    docker.image('docker:24.0.5').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
+                        sh "docker build -t ${DOCKER_IMAGE}:${TAG} ."
+                        sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin"
+                        sh "docker push ${DOCKER_IMAGE}:${TAG}"
+                    }
+                }
             }
         }
     }
+
     post {
         always {
             echo "Pipeline execution finished."
