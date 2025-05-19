@@ -4,6 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE = "sivasankar123/phone-number-validator"
         TAG = "latest"
+        DOCKER_USER = "sivasankar123"
+        DOCKER_PASS = "Siva@2003"
     }
 
     stages {
@@ -15,12 +17,8 @@ pipeline {
         }
 
         stage('Docker Login') {
-
-          
             steps {
-                 withCredentials([string(credentialsId: 'docker-hub-creds', variable: 'DOCKER_USER'), string(credentialsId: 'docker-hub-pass', variable: 'DOCKER_PASS')]) {
-                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-}
+                sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin"
             }
         }
 
